@@ -1,47 +1,62 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div id="app">
+    <header>
+      <h1>Learn Forest</h1>
+      <nav>
+        <router-link to="/admin/users">ユーザー管理</router-link> |
+        <router-link to="/admin/courses">講座管理</router-link> |
+        <router-link to="/user/enrollments">受講申込</router-link> |
+        <router-link to="/user/history">受講履歴</router-link>
+      </nav>
+    </header>
+    <main>
+      <router-view></router-view>
+    </main>
+    <footer>
+      <p>&copy; 2024 Learn Forest</p>
+    </footer>
+  </div>
 </template>
 
-<style scoped>
+<script setup>
+// No specific script logic needed for basic layout
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
 header {
-  line-height: 1.5;
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0 10px;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+nav a.router-link-exact-active {
+  color: #42b983;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+main {
+  padding: 20px;
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+footer {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #eee;
+  color: #777;
 }
 </style>
