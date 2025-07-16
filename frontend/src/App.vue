@@ -24,39 +24,37 @@
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--jps-font-family-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: var(--jps-color-text-primary);
 }
 
 header {
-  background-color: #f8f8f8;
-  padding: 20px;
-  border-bottom: 1px solid #eee;
+  background-color: var(--jps-color-background-primary);
+  padding: var(--jps-spacing-lg);
+  border-bottom: 1px solid var(--jps-color-border-divider);
 }
 
 nav a {
-  font-weight: bold;
-  color: #2c3e50;
-  margin: 0 10px;
+  font-weight: var(--jps-font-weight-bold);
+  color: var(--jps-color-text-primary);
+  margin: 0 var(--jps-spacing-md);
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: var(--jps-color-text-link-active);
 }
 
 main {
-  padding: 20px;
+  padding: var(--jps-spacing-lg);
 }
 
 footer {
-  margin-top: 40px;
-  padding: 20px;
-  background-color: #f8f8f8;
-  border-top: 1px solid #eee;
-  color: #777;
+  margin-top: var(--jps-spacing-xl);
+  padding: var(--jps-spacing-lg);
+  background-color: var(--jps-color-background-primary);
+  border-top: 1px solid var(--jps-color-border-divider);
+  color: var(--jps-color-text-secondary);
 }
 </style>

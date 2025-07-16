@@ -98,12 +98,12 @@ onMounted(fetchUsers);
 
 <style scoped>
 form {
-  margin-bottom: 20px;
+  margin-bottom: var(--jps-spacing-lg);
 }
 
 form input, form select, form button {
-  margin-right: 10px;
-  padding: 8px;
+  margin-right: var(--jps-spacing-md);
+  padding: var(--jps-spacing-sm);
 }
 
 ul {
@@ -112,17 +112,17 @@ ul {
 }
 
 li {
-  background-color: #f9f9f9;
-  border: 1px solid #eee;
-  padding: 10px;
-  margin-bottom: 5px;
+  background-color: var(--jps-color-background-secondary);
+  border: 1px solid var(--jps-color-border-divider);
+  padding: var(--jps-spacing-md);
+  margin-bottom: var(--jps-spacing-xs);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 li button {
-  margin-left: 10px;
-  padding: 5px 10px;
+  margin-left: var(--jps-spacing-md);
+  padding: var(--jps-spacing-xs) var(--jps-spacing-sm);
 }
 </style>

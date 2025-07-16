@@ -1,4 +1,5 @@
 import './assets/main.css'
+import '@digital-go-jp/design-tokens/dist/tokens.css'; // Corrected path
 
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -6,9 +7,9 @@ import App from './App.vue'
 
 // Placeholder components for routing
 import UserManagement from './views/UserManagementView.vue'
-const CourseManagement = { template: '<div>講座管理画面</div>' }
-const EnrollmentForm = { template: '<div>受講申込画面</div>' }
-const LearningHistory = { template: '<div>受講履歴画面</div>' }
+import CourseManagement from './views/CourseManagementView.vue'
+import EnrollmentForm from './views/EnrollmentView.vue'
+import LearningHistory from './views/LearningHistoryView.vue'
 
 const routes = [
   { path: '/admin/users', component: UserManagement },
