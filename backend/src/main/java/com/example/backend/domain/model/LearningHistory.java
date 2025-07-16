@@ -1,11 +1,22 @@
 package com.example.backend.domain.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
+@Entity
 public class LearningHistory {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
     private Course course;
+
     private LocalDate completionDate;
 
     public LearningHistory(Long id, User user, Course course, LocalDate completionDate) {
@@ -13,6 +24,9 @@ public class LearningHistory {
         this.user = user;
         this.course = course;
         this.completionDate = completionDate;
+    }
+
+    protected LearningHistory() { // JPAのために必要
     }
 
     public Long getId() {

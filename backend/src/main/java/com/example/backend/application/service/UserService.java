@@ -2,8 +2,9 @@ package com.example.backend.application.service;
 
 import com.example.backend.domain.model.User;
 import com.example.backend.domain.repository.UserRepository;
-import java.util.Optional;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,14 +20,14 @@ public class UserService {
     }
 
     public Optional<User> getUserById(Long id) {
-        return Optional.empty();
+        return userRepository.findById(id);
     }
 
     public User updateUser(User user) {
-        return null;
+        return userRepository.save(user);
     }
 
     public void deleteUser(Long id) {
-        // Implementation will go here
+        userRepository.deleteById(id);
     }
 }

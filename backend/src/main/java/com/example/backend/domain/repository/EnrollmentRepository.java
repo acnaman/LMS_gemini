@@ -1,9 +1,7 @@
 package com.example.backend.domain.repository;
 
 import com.example.backend.domain.model.Enrollment;
-import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EnrollmentRepository {
-    Enrollment save(Enrollment enrollment);
-    Optional<Enrollment> findById(Long id);
+public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
 }
