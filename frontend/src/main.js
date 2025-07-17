@@ -1,4 +1,3 @@
-import './assets/main.css'
 import '@digital-go-jp/design-tokens/dist/tokens.css'; // Corrected path
 
 import { createApp } from 'vue'
