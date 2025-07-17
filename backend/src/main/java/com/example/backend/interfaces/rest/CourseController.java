@@ -51,6 +51,16 @@ public class CourseController {
     }
 
     /**
+     * すべての講座を取得します。
+     *
+     * @return すべての講座のリスト
+     */
+    @GetMapping
+    public java.util.List<Course> getAllCourses() {
+        return courseService.getAllCourses();
+    }
+
+    /**
      * 講座を更新します。
      *
      * @param id 講座のID

@@ -43,4 +43,14 @@ public class EnrollmentService {
     public Optional<Enrollment> getEnrollmentById(Long id) {
         return enrollmentRepository.findById(id);
     }
-}
+
+    /**
+     * すべての受講登録を取得します。
+     *
+     * @return すべての受講登録のリスト
+     */
+    public java.util.List<Enrollment> getAllEnrollments() {
+        return enrollmentRepository.findAll();
+    }
+
+    }

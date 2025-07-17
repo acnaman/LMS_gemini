@@ -49,4 +49,14 @@ public class EnrollmentController {
         return enrollment.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    /**
+     * すべての受講登録を取得します。
+     *
+     * @return すべての受講登録のリスト
+     */
+    @GetMapping
+    public java.util.List<Enrollment> getAllEnrollments() {
+        return enrollmentService.getAllEnrollments();
+    }
 }

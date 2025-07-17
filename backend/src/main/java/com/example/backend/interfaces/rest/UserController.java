@@ -58,6 +58,16 @@ public class UserController {
     }
 
     /**
+     * すべてのユーザーを取得します。
+     *
+     * @return すべてのユーザーのリスト
+     */
+    @GetMapping
+    public java.util.List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    /**
      * ユーザーを更新します。
      *
      * @param id ユーザーのID

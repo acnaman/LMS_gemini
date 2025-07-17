@@ -45,6 +45,15 @@ public class CourseService {
     }
 
     /**
+     * すべての講座を取得します。
+     *
+     * @return すべての講座のリスト
+     */
+    public java.util.List<Course> getAllCourses() {
+        return courseRepository.findAll();
+    }
+
+    /**
      * 講座を更新します。
      *
      * @param course 更新する講座エンティティ

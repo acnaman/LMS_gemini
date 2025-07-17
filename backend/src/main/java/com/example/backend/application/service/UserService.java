@@ -45,6 +45,15 @@ public class UserService {
     }
 
     /**
+     * すべてのユーザーを取得します。
+     *
+     * @return すべてのユーザーのリスト
+     */
+    public java.util.List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    /**
      * ユーザーを更新します。
      *
      * @param user 更新するユーザーエンティティ
