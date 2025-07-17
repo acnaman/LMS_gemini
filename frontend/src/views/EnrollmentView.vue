@@ -2,29 +2,19 @@
   <div>
     <h1 class="mb-4">受講申込</h1>
 
-    <div class="card">
-      <div class="card-header">
-        開講中のコース
-      </div>
-      <div class="card-body">
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th scope="col">タイトル</th>
-              <th scope="col">説明</th>
-              <th scope="col">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="course in availableCourses" :key="course.id">
-              <td>{{ course.title }}</td>
-              <td>{{ course.description }}</td>
-              <td>
-                <button type="button" class="btn btn-sm btn-primary" @click="enroll(course.id)">申し込む</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+      <div class="col" v-for="course in availableCourses" :key="course.id">
+        <div class="card h-100 d-flex flex-column">
+          <div class="card-body flex-grow-1">
+            <h5 class="card-title">{{ course.title }}</h5>
+            <p class="card-text">{{ course.description }}</p>
+            <!-- 講師情報があればここに追加 -->
+            <!-- <p class="card-text"><small class="text-muted">講師: {{ course.instructor }}</small></p> -->
+          </div>
+          <div class="card-footer text-end">
+            <button type="button" class="btn btn-sm btn-primary" @click="enroll(course.id)">申し込む</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -63,4 +53,7 @@ onMounted(fetchAvailableCourses);
 </script>
 
 <style scoped>
+.card {
+  min-height: 180px; /* 適切な最小高さを設定 */
+}
 </style>

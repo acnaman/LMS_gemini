@@ -1,4 +1,5 @@
 import '@digital-go-jp/design-tokens/dist/tokens.css'; // Corrected path
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
