@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.3'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'jacoco' // JaCoCoプラグインを追加
 }
 
 group = 'com.example'
@@ -32,6 +33,32 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
+// JaCoCoの設定
+jacoco {
+    toolVersion = "0.8.11" // JaCoCoのバージョンを指定
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks.jacocoTestReport {
+    dependsOn tasks.test
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect { file ->
+            fileTree(file) {
+                exclude(
+                    '**/BackendApplication.class',
+                    '**/config/**',
+                    '**/interfaces/rest/**'
+                )
+            }
+        }))
+    }
 }
