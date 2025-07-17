@@ -30,9 +30,20 @@ class EnrollmentControllerTest {
 
     @Test
     void testCreateEnrollment() throws Exception {
-        User user = new User(1L, "testuser", Role.USER);
-        Course course = new Course(1L, "Test Course", "Description");
-        Enrollment enrollment = new Enrollment(1L, user, course);
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("testuser");
+        user.setRole(Role.USER);
+
+        Course course = new Course();
+        course.setId(1L);
+        course.setTitle("Test Course");
+        course.setDescription("Description");
+
+        Enrollment enrollment = new Enrollment();
+        enrollment.setId(1L);
+        enrollment.setUser(user);
+        enrollment.setCourse(course);
 
         when(enrollmentService.createEnrollment(any(Enrollment.class))).thenReturn(enrollment);
 
@@ -47,9 +58,20 @@ class EnrollmentControllerTest {
 
     @Test
     void testGetEnrollmentById() throws Exception {
-        User user = new User(1L, "testuser", Role.USER);
-        Course course = new Course(1L, "Test Course", "Description");
-        Enrollment enrollment = new Enrollment(1L, user, course);
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("testuser");
+        user.setRole(Role.USER);
+
+        Course course = new Course();
+        course.setId(1L);
+        course.setTitle("Test Course");
+        course.setDescription("Description");
+
+        Enrollment enrollment = new Enrollment();
+        enrollment.setId(1L);
+        enrollment.setUser(user);
+        enrollment.setCourse(course);
 
         when(enrollmentService.getEnrollmentById(1L)).thenReturn(java.util.Optional.of(enrollment));
 

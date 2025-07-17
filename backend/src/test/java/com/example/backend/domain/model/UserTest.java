@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 class UserTest {
     @Test
     void testUserCreation() {
-        User user = new User(1L, "testuser", Role.USER);
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("testuser");
+        user.setRole(Role.USER);
         assertEquals(1L, user.getId());
         assertEquals("testuser", user.getUsername());
         assertEquals(Role.USER, user.getRole());

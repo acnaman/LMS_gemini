@@ -7,9 +7,20 @@ import org.junit.jupiter.api.Test;
 class EnrollmentTest {
     @Test
     void testEnrollmentCreation() {
-        User user = new User(1L, "testuser", Role.USER);
-        Course course = new Course(1L, "Test Course", "This is a test course.");
-        Enrollment enrollment = new Enrollment(1L, user, course);
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("testuser");
+        user.setRole(Role.USER);
+
+        Course course = new Course();
+        course.setId(1L);
+        course.setTitle("Test Course");
+        course.setDescription("This is a test course.");
+
+        Enrollment enrollment = new Enrollment();
+        enrollment.setId(1L);
+        enrollment.setUser(user);
+        enrollment.setCourse(course);
 
         assertEquals(1L, enrollment.getId());
         assertEquals(user, enrollment.getUser());

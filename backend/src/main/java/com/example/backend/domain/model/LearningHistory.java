@@ -17,7 +17,6 @@ import lombok.EqualsAndHashCode;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class LearningHistory {

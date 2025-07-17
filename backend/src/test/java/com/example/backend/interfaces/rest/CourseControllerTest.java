@@ -27,7 +27,10 @@ class CourseControllerTest {
 
     @Test
     void testCreateCourse() throws Exception {
-        Course course = new Course(1L, "Test Course", "Description of Test Course");
+        Course course = new Course();
+        course.setId(1L);
+        course.setTitle("Test Course");
+        course.setDescription("Description of Test Course");
         when(courseService.createCourse(any(Course.class))).thenReturn(course);
 
         mockMvc.perform(post("/api/admin/courses")
@@ -41,7 +44,10 @@ class CourseControllerTest {
 
     @Test
     void testGetCourseById() throws Exception {
-        Course course = new Course(1L, "Test Course", "Description of Test Course");
+        Course course = new Course();
+        course.setId(1L);
+        course.setTitle("Test Course");
+        course.setDescription("Description of Test Course");
         when(courseService.getCourseById(1L)).thenReturn(java.util.Optional.of(course));
 
         mockMvc.perform(get("/api/admin/courses/1"))
@@ -53,7 +59,10 @@ class CourseControllerTest {
 
     @Test
     void testUpdateCourse() throws Exception {
-        Course updatedCourse = new Course(1L, "Updated Course", "Updated Description");
+        Course updatedCourse = new Course();
+        updatedCourse.setId(1L);
+        updatedCourse.setTitle("Updated Course");
+        updatedCourse.setDescription("Updated Description");
         when(courseService.updateCourse(any(Course.class))).thenReturn(updatedCourse);
 
         mockMvc.perform(put("/api/admin/courses/1")

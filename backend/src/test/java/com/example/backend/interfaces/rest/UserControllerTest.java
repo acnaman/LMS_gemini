@@ -33,7 +33,10 @@ class UserControllerTest {
 
     @Test
     void testCreateUser() throws Exception {
-        User user = new User(1L, "testuser", Role.USER);
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("testuser");
+        user.setRole(Role.USER);
         when(userService.createUser(any(User.class))).thenReturn(user);
 
         mockMvc.perform(post("/api/admin/users")
@@ -47,7 +50,10 @@ class UserControllerTest {
 
     @Test
     void testGetUserById() throws Exception {
-        User user = new User(1L, "testuser", Role.USER);
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("testuser");
+        user.setRole(Role.USER);
         when(userService.getUserById(1L)).thenReturn(java.util.Optional.of(user));
 
         mockMvc.perform(get("/api/admin/users/1"))
@@ -59,7 +65,10 @@ class UserControllerTest {
 
     @Test
     void testUpdateUser() throws Exception {
-        User updatedUser = new User(1L, "updateduser", Role.ADMIN);
+        User updatedUser = new User();
+        updatedUser.setId(1L);
+        updatedUser.setUsername("updateduser");
+        updatedUser.setRole(Role.ADMIN);
         when(userService.updateUser(any(User.class))).thenReturn(updatedUser);
 
         mockMvc.perform(put("/api/admin/users/1")

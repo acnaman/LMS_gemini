@@ -35,10 +35,22 @@ class LearningHistoryControllerTest {
 
     @Test
     void testCreateLearningHistory() throws Exception {
-        User user = new User(1L, "testuser", Role.USER);
-        Course course = new Course(1L, "Test Course", "Description");
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("testuser");
+        user.setRole(Role.USER);
+
+        Course course = new Course();
+        course.setId(1L);
+        course.setTitle("Test Course");
+        course.setDescription("Description");
+
         LocalDate completionDate = LocalDate.now();
-        LearningHistory learningHistory = new LearningHistory(1L, user, course, completionDate);
+        LearningHistory learningHistory = new LearningHistory();
+        learningHistory.setId(1L);
+        learningHistory.setUser(user);
+        learningHistory.setCourse(course);
+        learningHistory.setCompletionDate(completionDate);
 
         when(learningHistoryService.createLearningHistory(any(LearningHistory.class))).thenReturn(learningHistory);
 
@@ -54,10 +66,22 @@ class LearningHistoryControllerTest {
 
     @Test
     void testGetLearningHistoryById() throws Exception {
-        User user = new User(1L, "testuser", Role.USER);
-        Course course = new Course(1L, "Test Course", "Description");
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("testuser");
+        user.setRole(Role.USER);
+
+        Course course = new Course();
+        course.setId(1L);
+        course.setTitle("Test Course");
+        course.setDescription("Description");
+
         LocalDate completionDate = LocalDate.now();
-        LearningHistory learningHistory = new LearningHistory(1L, user, course, completionDate);
+        LearningHistory learningHistory = new LearningHistory();
+        learningHistory.setId(1L);
+        learningHistory.setUser(user);
+        learningHistory.setCourse(course);
+        learningHistory.setCompletionDate(completionDate);
 
         when(learningHistoryService.getLearningHistoryById(1L)).thenReturn(Optional.of(learningHistory));
 
@@ -71,14 +95,36 @@ class LearningHistoryControllerTest {
 
     @Test
     void testGetLearningHistoriesByUserId() throws Exception {
-        User user = new User(1L, "testuser", Role.USER);
-        Course course1 = new Course(1L, "Course 1", "Desc 1");
-        Course course2 = new Course(2L, "Course 2", "Desc 2");
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("testuser");
+        user.setRole(Role.USER);
+
+        Course course1 = new Course();
+        course1.setId(1L);
+        course1.setTitle("Course 1");
+        course1.setDescription("Desc 1");
+
+        Course course2 = new Course();
+        course2.setId(2L);
+        course2.setTitle("Course 2");
+        course2.setDescription("Desc 2");
+
         LocalDate completionDate1 = LocalDate.now();
         LocalDate completionDate2 = LocalDate.now().minusDays(1);
 
-        LearningHistory lh1 = new LearningHistory(1L, user, course1, completionDate1);
-        LearningHistory lh2 = new LearningHistory(2L, user, course2, completionDate2);
+        LearningHistory lh1 = new LearningHistory();
+        lh1.setId(1L);
+        lh1.setUser(user);
+        lh1.setCourse(course1);
+        lh1.setCompletionDate(completionDate1);
+
+        LearningHistory lh2 = new LearningHistory();
+        lh2.setId(2L);
+        lh2.setUser(user);
+        lh2.setCourse(course2);
+        lh2.setCompletionDate(completionDate2);
+
         List<LearningHistory> learningHistories = Arrays.asList(lh1, lh2);
 
         when(learningHistoryService.getLearningHistoriesByUserId(1L)).thenReturn(learningHistories);
