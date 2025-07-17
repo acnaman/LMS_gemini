@@ -14,21 +14,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
+/**
+ * ユーザー管理のためのRESTコントローラー。
+ * 管理者権限を持つユーザーがユーザーの作成、取得、更新、削除を行うためのAPIを提供します。
+ */
 @RestController
 @RequestMapping("/api/admin/users")
 public class UserController {
 
     private final UserService userService;
 
+    /**
+     * UserControllerの新しいインスタンスを構築します。
+     *
+     * @param userService ユーザーサービス
+     */
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
+    /**
+     * 新しいユーザーを作成します。
+     *
+     * @param user 作成するユーザーエンティティ
+     * @return 作成されたユーザーエンティティ
+     */
     @PostMapping
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 
+    /**
+     * 指定されたIDのユーザーを取得します。
+     *
+     * @param id ユーザーのID
+     * @return 指定されたIDのユーザー（存在する場合）
+     */
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         Optional<User> user = userService.getUserById(id);
@@ -36,6 +57,13 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    /**
+     * ユーザーを更新します。
+     *
+     * @param id ユーザーのID
+     * @param user 更新するユーザーエンティティ
+     * @return 更新されたユーザーエンティティ
+     */
     @PutMapping("/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
         // Ensure the ID in the path matches the ID in the request body
@@ -43,6 +71,12 @@ public class UserController {
         return userService.updateUser(user);
     }
 
+    /**
+     * 指定されたIDのユーザーを削除します。
+     *
+     * @param id 削除するユーザーのID
+     * @return HTTP 204 No Content
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
