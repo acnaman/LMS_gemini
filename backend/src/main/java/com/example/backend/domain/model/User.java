@@ -4,18 +4,31 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
 
 /**
  * ユーザーエンティティ。
  * ユーザーのID、ユーザー名、役割を管理します。
  */
 @Entity(name = "app_user")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
     /**
      * ユーザーID。
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     /**
@@ -28,24 +41,7 @@ public class User {
      */
     private Role role;
 
-    /**
-     * 新しいユーザーを構築します。
-     *
-     * @param id ユーザーID
-     * @param username ユーザー名
-     * @param role ユーザーの役割
-     */
-    public User(Long id, String username, Role role) {
-        this.id = id;
-        this.username = username;
-        this.role = role;
-    }
-
-    /**
-     * JPAのために必要なデフォルトコンストラクタ。
-     */
-    protected User() {
-    }
+    
 
     /**
      * ユーザーIDを取得します。

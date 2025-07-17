@@ -2,18 +2,31 @@ package com.example.backend.domain.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
 
 /**
  * 学習履歴エンティティ。
  * ユーザー、講座、完了日を管理します。
  */
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class LearningHistory {
     /**
      * 学習履歴ID。
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     /**
@@ -35,26 +48,7 @@ public class LearningHistory {
      */
     private LocalDate completionDate;
 
-    /**
-     * 新しい学習履歴を構築します。
-     *
-     * @param id 学習履歴ID
-     * @param user ユーザー
-     * @param course 講座
-     * @param completionDate 完了日
-     */
-    public LearningHistory(Long id, User user, Course course, LocalDate completionDate) {
-        this.id = id;
-        this.user = user;
-        this.course = course;
-        this.completionDate = completionDate;
-    }
-
-    /**
-     * JPAのために必要なデフォルトコンストラクタ。
-     */
-    protected LearningHistory() {
-    }
+    
 
     /**
      * 学習履歴IDを取得します。

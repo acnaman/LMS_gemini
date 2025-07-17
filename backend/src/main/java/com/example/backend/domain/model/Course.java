@@ -4,18 +4,31 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
 
 /**
  * 講座エンティティ。
  * 講座のID、タイトル、説明を管理します。
  */
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Course {
     /**
      * 講座ID。
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     /**
@@ -28,24 +41,7 @@ public class Course {
      */
     private String description;
 
-    /**
-     * 新しい講座を構築します。
-     *
-     * @param id 講座ID
-     * @param title 講座のタイトル
-     * @param description 講座の説明
-     */
-    public Course(Long id, String title, String description) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-    }
-
-    /**
-     * JPAのために必要なデフォルトコンストラクタ。
-     */
-    protected Course() {
-    }
+    
 
     /**
      * 講座IDを取得します。
