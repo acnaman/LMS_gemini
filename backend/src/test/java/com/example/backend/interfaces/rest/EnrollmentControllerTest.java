@@ -25,6 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@SuppressWarnings("deprecation")
 @WebMvcTest(EnrollmentController.class)
 @WithMockUser(roles = "USER") // USERロールを持つモックユーザーとしてテストを実行
 class EnrollmentControllerTest {

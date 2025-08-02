@@ -15,6 +15,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 // ... imports
 
+@SuppressWarnings("deprecation")
 @WebMvcTest(CourseController.class)
 @WithMockUser(roles = "ADMIN") // ADMINロールを持つモックユーザーとしてテストを実行
 class CourseControllerTest {
