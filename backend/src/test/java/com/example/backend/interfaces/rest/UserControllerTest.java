@@ -3,33 +3,51 @@ package com.example.backend.interfaces.rest;
 import com.example.backend.application.service.UserService;
 import com.example.backend.domain.model.Role;
 import com.example.backend.domain.model.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete; // Add this import
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 
 @WebMvcTest(UserController.class)
+@WithMockUser(roles = "ADMIN") // ADMINロールを持つモックユーザーとしてテストを実行
 class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private WebApplicationContext context;
 
     @MockBean
     private UserService userService;
 
     @MockBean
     private com.example.backend.domain.repository.UserRepository userRepository;
+
+    @BeforeEach
+    public void setup() {
+        mockMvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .apply(springSecurity())
+                .build();
+    }
 
     @Test
     void testCreateUser() throws Exception {
@@ -39,10 +57,10 @@ class UserControllerTest {
         user.setRole(Role.USER);
         when(userService.createUser(any(User.class))).thenReturn(user);
 
-        mockMvc.perform(post("/api/admin/users")
+        mockMvc.perform(post("/api/admin/users").with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"username\":\"testuser\",\"role\":\"USER\"}"))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.username").value("testuser"))
                 .andExpect(jsonPath("$.role").value("USER"));
@@ -71,7 +89,7 @@ class UserControllerTest {
         updatedUser.setRole(Role.ADMIN);
         when(userService.updateUser(any(User.class))).thenReturn(updatedUser);
 
-        mockMvc.perform(put("/api/admin/users/1")
+        mockMvc.perform(put("/api/admin/users/1").with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"id\":1,\"username\":\"updateduser\",\"role\":\"ADMIN\"}"))
                 .andExpect(status().isOk())
@@ -82,7 +100,7 @@ class UserControllerTest {
 
     @Test
     void testDeleteUser() throws Exception {
-        mockMvc.perform(delete("/api/admin/users/1"))
+        mockMvc.perform(delete("/api/admin/users/1").with(csrf()))
                 .andExpect(status().isNoContent());
     }
 }

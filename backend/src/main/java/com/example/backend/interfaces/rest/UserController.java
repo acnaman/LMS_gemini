@@ -40,8 +40,9 @@ public class UserController {
      * @return 作成されたユーザーエンティティ
      */
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User createdUser = userService.createUser(user);
+        return ResponseEntity.status(201).body(createdUser);
     }
 
     /**

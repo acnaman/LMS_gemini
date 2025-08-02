@@ -34,8 +34,9 @@ public class LearningHistoryController {
      * @return 作成された学習履歴エンティティ
      */
     @PostMapping
-    public LearningHistory createLearningHistory(@RequestBody LearningHistory learningHistory) {
-        return learningHistoryService.createLearningHistory(learningHistory);
+    public ResponseEntity<LearningHistory> createLearningHistory(@RequestBody LearningHistory learningHistory) {
+        LearningHistory createdLearningHistory = learningHistoryService.createLearningHistory(learningHistory);
+        return ResponseEntity.status(201).body(createdLearningHistory);
     }
 
     /**

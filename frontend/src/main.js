@@ -2,26 +2,22 @@ import '@digital-go-jp/design-tokens/dist/tokens.css'; // Corrected path
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import router from './router'; // 新しく作成したルーターをインポート
 import App from './App.vue'
+import axios from 'axios';
 
-// Placeholder components for routing
-import UserManagement from './views/UserManagementView.vue'
-import CourseManagement from './views/CourseManagementView.vue'
-import EnrollmentForm from './views/EnrollmentView.vue'
-import LearningHistory from './views/LearningHistoryView.vue'
-
-const routes = [
-  { path: '/admin/users', component: UserManagement },
-  { path: '/admin/courses', component: CourseManagement },
-  { path: '/user/enrollments', component: EnrollmentForm },
-  { path: '/user/history', component: LearningHistory },
-  { path: '/', redirect: '/admin/users' } // Default route
-]
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes,
-})
+// Axiosインターセプターを設定
+axios.interceptors.request.use(
+  config => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      config.headers.Authorization = `Bearer ${jwt}`;
+    }
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
 
 createApp(App).use(router).mount('#app')

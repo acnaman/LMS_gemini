@@ -33,8 +33,9 @@ public class CourseController {
      * @return 作成された講座エンティティ
      */
     @PostMapping
-    public Course createCourse(@RequestBody Course course) {
-        return courseService.createCourse(course);
+    public ResponseEntity<Course> createCourse(@RequestBody Course course) {
+        Course createdCourse = courseService.createCourse(course);
+        return ResponseEntity.status(201).body(createdCourse);
     }
 
     /**

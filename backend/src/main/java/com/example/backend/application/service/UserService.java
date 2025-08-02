@@ -2,6 +2,7 @@ package com.example.backend.application.service;
 
 import com.example.backend.domain.model.User;
 import com.example.backend.domain.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,14 +15,17 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * UserServiceの新しいインスタンスを構築します。
      *
      * @param userRepository ユーザーリポジトリ
+     * @param passwordEncoder パスワードエンコーダー
      */
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -31,7 +35,18 @@ public class UserService {
      * @return 作成されたユーザーエンティティ
      */
     public User createUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    /**
+     * ユーザー名でユーザーを取得します。
+     *
+     * @param username ユーザー名
+     * @return 指定されたユーザー名のユーザー（存在する場合）
+     */
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     /**
@@ -60,6 +75,10 @@ public class UserService {
      * @return 更新されたユーザーエンティティ
      */
     public User updateUser(User user) {
+        // パスワードが更新される場合はハッシュ化する
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         return userRepository.save(user);
     }
 

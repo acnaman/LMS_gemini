@@ -33,8 +33,9 @@ public class EnrollmentController {
      * @return 作成された受講登録エンティティ
      */
     @PostMapping
-    public Enrollment createEnrollment(@RequestBody Enrollment enrollment) {
-        return enrollmentService.createEnrollment(enrollment);
+    public ResponseEntity<Enrollment> createEnrollment(@RequestBody Enrollment enrollment) {
+        Enrollment createdEnrollment = enrollmentService.createEnrollment(enrollment);
+        return ResponseEntity.status(201).body(createdEnrollment);
     }
 
     /**

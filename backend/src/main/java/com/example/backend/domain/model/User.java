@@ -1,5 +1,6 @@
 package com.example.backend.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore; // Import JsonIgnore
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +20,7 @@ import lombok.EqualsAndHashCode;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
@@ -36,11 +38,15 @@ public class User {
     private String username;
 
     /**
+     * パスワード。
+     */
+    @JsonIgnore // Add this annotation
+    private String password;
+
+    /**
      * ユーザーの役割。
      */
     private Role role;
-
-    
 
     /**
      * ユーザーIDを取得します。
@@ -58,6 +64,15 @@ public class User {
      */
     public String getUsername() {
         return username;
+    }
+
+    /**
+     * パスワードを取得します。
+     *
+     * @return パスワード
+     */
+    public String getPassword() {
+        return password;
     }
 
     /**
